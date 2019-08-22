@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  app:
+      build: .
+      stdin_open: true
+      tty: true
+      volumes:
+        - ./src:/src
