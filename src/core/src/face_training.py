@@ -24,7 +24,7 @@ def getImagesAndLabels(path):
     for imagePath in imagePaths:
 
         PIL_img = Image.open(imagePath).convert('L')  # convert it to grayscale
-        img_numpy = np.array(PIL_img, 'uint8')
+        img_numpy = np.array(PIL_img, 'float32')
 
         id = int(os.path.split(imagePath)[-1].split('.')[1])
         faces = detector.detectMultiScale(img_numpy)
@@ -35,8 +35,9 @@ def getImagesAndLabels(path):
 
     return (faceSamples, ids)
 
-
+print(detector)
 print('\n [INFO] Training faces. It will take a few seconds. Wait ...')
+
 (faces, ids) = getImagesAndLabels(path)
 recognizer.train(faces, np.array(ids))
 

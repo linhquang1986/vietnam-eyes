@@ -7,3 +7,5 @@ services:
       tty: true
       volumes:
         - ./src:/src
+      # devices:
+      #   - /USB/VID_0BDA&PID_5769&MI_00/6&1FF99936&0&0000:/dev/video0
