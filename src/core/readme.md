@@ -1,5 +1,7 @@
 ## 1. Run docker container
 
+	Set-NetConnectionProfile -interfacealias "vEthernet (DockerNAT)" -NetworkCategory Private // Windows only
+
     docker-compose up --build --force-recreate
 
 ## 2. View Docker status
