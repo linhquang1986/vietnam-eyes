@@ -10,7 +10,7 @@ import os
 path = 'dataset'
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+detector = cv2.CascadeClassifier('/src/haarcascade_frontalface_default.xml')
 
 
 # function to get the images and label data
@@ -24,18 +24,20 @@ def getImagesAndLabels(path):
     for imagePath in imagePaths:
 
         PIL_img = Image.open(imagePath).convert('L')  # convert it to grayscale
-        img_numpy = np.array(PIL_img, 'float32')
+        img_numpy = np.array(PIL_img, 'int8')
 
         id = int(os.path.split(imagePath)[-1].split('.')[1])
+        print('\n')
+        print(img_numpy)
         faces = detector.detectMultiScale(img_numpy)
-
+        print('\nfaces', faces, '\n')
         for (x, y, w, h) in faces:
             faceSamples.append(img_numpy[y:y + h, x:x + w])
             ids.append(id)
 
     return (faceSamples, ids)
 
-print(detector)
+print('\n', detector, '\n')
 print('\n [INFO] Training faces. It will take a few seconds. Wait ...')
 
 (faces, ids) = getImagesAndLabels(path)

@@ -1,37 +1,16 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-import sys
-import getopt
-import time
+import numpy as np
+import cv2
 
+cap = cv2.VideoCapture('rapid.mp4')
 
-def main(argv):
-    argument = ''
-    usage = 'usage: script.py -f <sometext>'
+while(cap.isOpened()):
+    ret, frame = cap.read()
 
-    # parse incoming arguments
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    try:
-        (opts, args) = getopt.getopt(argv, 'hf:', ['foo='])
-    except getopt.GetoptError:
-        print(usage)
-        sys.exit(2)
-    for (opt, arg) in opts:
-        if opt == '-h':
-            print(usage)
-            sys.exit()
-        elif opt in ('-f', '--foo'):
-            argument = arg
+    cv2.imshow('frame', gray)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
-    # print output
-
-    print('Start : %s' % time.ctime())
-    time.sleep(5)
-    print('Foo is')
-    time.sleep(5)
-    print(argument)
-    print('End : %s' % time.ctime())
-
-
-if __name__ == '__main__':
-    main(sys.argv[1:])
+cap.release()
+cv2.destroyAllWindows()

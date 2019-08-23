@@ -9,6 +9,7 @@ RUN apt-get update \
         wget \
         unzip \
         yasm \
+        libgtk2.0-dev \
         pkg-config \
         libswscale-dev \
         libtbb2 \
@@ -25,7 +26,7 @@ RUN pip install numpy
 RUN pip install Pillow
 
 WORKDIR /
-ENV OPENCV_VERSION="4.1.0"
+ENV OPENCV_VERSION="3.4.5"
 RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
 && unzip ${OPENCV_VERSION}.zip \
 && mkdir /opencv-${OPENCV_VERSION}/cmake_binary \
