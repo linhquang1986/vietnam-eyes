@@ -2,8 +2,10 @@ import cv2
 import numpy as np
 import os 
 import logging
-recognizer = cv2.face.LBPHFaceRecognizer_create()
-recognizer.read('trainer/trainer.yml')
+#recognizer = cv2.face.LBPHFaceRecognizer_create()
+recognizer = cv2.face.createLBPHFaceRecognizer()
+#recognizer.read('trainer/trainer.yml') --> cai nay dung cho openCV3.3 tro len
+recognizer.load('trainer/trainer.yml')
 cascadePath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascadePath);
 
