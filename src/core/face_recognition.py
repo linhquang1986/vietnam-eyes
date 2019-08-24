@@ -7,7 +7,7 @@ recognizer = cv2.face.createLBPHFaceRecognizer()
 #recognizer.read('trainer/trainer.yml') --> cai nay dung cho openCV3.3 tro len
 recognizer.load('trainer/trainer.yml')
 cascadePath = "haarcascade_frontalface_default.xml"
-faceCascade = cv2.CascadeClassifier(cascadePath);
+faceCascade = cv2.CascadeClassifier(cascadePath)
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 
@@ -29,7 +29,7 @@ minH = 0.1*cam.get(4)
 while True:
 
     ret, img =cam.read()
-    img = cv2.flip(img, -1) # Flip vertically
+    img = cv2.flip(img, 1) # Flip vertically
 
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
@@ -50,16 +50,16 @@ while True:
         if (confidence < 100):
             id = names[id]
             confidence = "  {0}%".format(round(100 - confidence))
-            logging.debug(id)
+            print(id)
         else:
             id = "unknown"
             confidence = "  {0}%".format(round(100 - confidence))
-            logging.debug(id)
+            print(id)
         
-        cv2.putText(img, str(id), (x+5,y-5), font, 1, (255,255,255), 2)
+        #cv2.putText(img, str(id), (x+5,y-5), font, 1, (255,255,255), 2)
         cv2.putText(img, str(confidence), (x+5,y+h-5), font, 1, (255,255,0), 1)  
     
-    cv2.imshow('camera',img) 
+    #cv2.imshow('camera',img) 
 
     k = cv2.waitKey(10) & 0xff # Press 'ESC' for exiting video
     if k == 27:
